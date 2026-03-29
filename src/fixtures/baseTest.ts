@@ -1,12 +1,14 @@
 import { Page, test as base } from "@playwright/test";
 import { Homepage } from "../pages/HomePage/Homepage";
 import { ManageEventsPage } from "../pages/ManageEvents/ManageEventsPage";
+import { EventPage } from "../pages/Event/EventPage";
 
 
 type BaseTestFixtures = {
     mainPage: Page
     homePage: Homepage
     manageEvents: ManageEventsPage
+    eventPage: EventPage
 }
 
 export const test = base.extend<BaseTestFixtures>({
@@ -28,6 +30,10 @@ export const test = base.extend<BaseTestFixtures>({
 
     manageEvents: async ({ page }, use) => {
         await use(new ManageEventsPage(page))
+    },
+
+    eventPage: async ({ page }, use) => {
+        await use(new EventPage(page))
     }
 })
 

@@ -15,7 +15,7 @@ export class HomePageLocators {
     constructor(page: Page) {
         this.page = page
         this.HOME = this.page.getByRole('link', { name: 'Home' })
-        this.EVENTS = this.page.getByRole('link', { name: 'Events' })
+        this.EVENTS = this.page.getByTestId('nav-events')
         this.MY_BOOKINGS_NAVBAR = this.page.getByRole('link', { name: 'My Bookings' })
         this.ADMIN = this.page.getByRole('button', { name: "Admin" })
         this.MANAGE_EVENTS = this.page.getByRole('link',{name:"Manage Events"}).nth(0)
