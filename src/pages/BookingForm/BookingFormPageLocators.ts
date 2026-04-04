@@ -9,6 +9,7 @@ export class BookingFormPageLocators {
     CONFIRM_BUTTON: Locator
     BOOKING_REFERENCE: Locator
     VIEW_MY_BOOKINGS: Locator
+    INCREMENT_BUTTON :Locator
 
     constructor(page: Page) {
         this.page = page
@@ -19,5 +20,6 @@ export class BookingFormPageLocators {
         this.CONFIRM_BUTTON = this.page.getByRole('button', { name: 'Confirm Booking' })
         this.BOOKING_REFERENCE = this.page.locator('span.booking-ref')
         this.VIEW_MY_BOOKINGS = this.page.getByRole('button',{name:'View My Bookings'})
+        this.INCREMENT_BUTTON = this.page.getByRole('button',{name:'+'})
     }
 }

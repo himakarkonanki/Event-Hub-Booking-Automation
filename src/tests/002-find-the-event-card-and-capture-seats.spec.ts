@@ -2,6 +2,7 @@ import { test, expect } from "../fixtures/baseTest"
 import eventData from "../../testdata/eventData.json"
 import { bookingDetails } from "../../testdata/bookingDetails.json"
 import { testConfiguration } from "../../test.config"
+import evenData from "../../testdata/eventData.json"
 
 
 test("Find the event card and capture seats", async ({ homePage, eventPage, bookingForm, myBookingPage }) => {
@@ -27,6 +28,8 @@ test("Find the event card and capture seats", async ({ homePage, eventPage, book
 
     await test.step("Assert: element with id #ticket-count has text 1 (default quantity)", async () => {
         await expect(bookingForm.bookingFormLocators.TICKET_COUNT, 'verify the ticket count to be 1').toHaveCount(1)
+        await bookingForm.bookingFormLocators.INCREMENT_BUTTON.click()
+        await bookingForm.bookingFormLocators.INCREMENT_BUTTON.click()
     })
 
     await test.step("Enter the details", async () => {
@@ -48,5 +51,16 @@ test("Find the event card and capture seats", async ({ homePage, eventPage, book
         const cards = await myBookingPage.getBookingCards()
         await expect(myBookingPage.myBookingPageLocators.BOOKING_CARD_BY_REF_ID(bookingReferenceNumber),'Verify booking card with the Ref id is visible').toBeVisible()
         await expect(myBookingPage.myBookingPageLocators.BOOKING_CARD_BY_REF_ID_AND_NAME(bookingReferenceNumber)).toHaveText(`Sunburn - Asia's largest music festival`)
+    })
+
+    await test.step("Navigate back to /events",async()=>{
+        await homePage.homePageLocator.EVENTS.click()
+    })
+
+    await test.step("Filter the cards using event title and verify seat count",async()=>{
+        await expect(eventPage.eventPageLocators.EVENT_CARD_BY_TITLE(evenData.event.title)).toBeVisible()
+        const seatsAfterBooking = await eventPage.eventPageLocators.SEATS_AVAILABLE.nth(3).innerText()
+        const seatsAvailable = seatsAvailableBeforeBooking - 3
+        expect(seatsAfterBooking).toBe(`${seatsAvailable} seats available`)
     })
 })

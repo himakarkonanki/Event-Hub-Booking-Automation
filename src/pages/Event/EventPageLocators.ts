@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { title } from "node:process";
+
 
 export class EventPageLocators {
     page: Page
