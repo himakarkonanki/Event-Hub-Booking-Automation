@@ -2,6 +2,8 @@ import { Page, test as base } from "@playwright/test";
 import { Homepage } from "../pages/HomePage/Homepage";
 import { ManageEventsPage } from "../pages/ManageEvents/ManageEventsPage";
 import { EventPage } from "../pages/Event/EventPage";
+import { BookingFormPage } from "../pages/BookingForm/BookingFormPage";
+import { MyBookingsPage } from "../pages/MyBookings/MyBookingsPage";
 
 
 type BaseTestFixtures = {
@@ -9,6 +11,8 @@ type BaseTestFixtures = {
     homePage: Homepage
     manageEvents: ManageEventsPage
     eventPage: EventPage
+    bookingForm: BookingFormPage
+    myBookingPage:MyBookingsPage
 }
 
 export const test = base.extend<BaseTestFixtures>({
@@ -34,6 +38,14 @@ export const test = base.extend<BaseTestFixtures>({
 
     eventPage: async ({ page }, use) => {
         await use(new EventPage(page))
+    },
+
+    bookingForm: async ({ page }, use) => {
+        await use(new BookingFormPage(page))
+    },
+
+    myBookingPage: async({page}, use)=>{
+        await use(new MyBookingsPage(page))
     }
 })
 
